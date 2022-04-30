@@ -12,6 +12,8 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdn-tailwindcss.vercel.app/?plugins=forms,typography,aspect-ratio,line-clamp" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" defer></script>
+    <script src="./js/addPost.js" defer></script>
 </head>
 <style>
     .card-shandow {
@@ -26,10 +28,7 @@
     .title::after {
         content: '';
         position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        inset: 0;
         border: #000 2px solid;
         background: white;
         transform: translateX(-6px) translateY(6px);
@@ -57,12 +56,9 @@
                     alt="">
             </div>
             <div class="flex justify-center">
-                <button type="button"
-                    class="border-2 border-black rounded-lg font-semibold bg-gray-400 w-[320px] py-4 transition duration-200 hover:bg-yellow-400">送出貼文</button>
+                <button type="button" id="btn"  class="border-2 border-black rounded-lg font-semibold bg-gray-400 w-[320px] py-4 transition duration-200 hover:bg-yellow-400">送出貼文</button>
             </div>
-
         </form>
-
     </div>
 </body>
 
