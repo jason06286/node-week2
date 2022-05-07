@@ -7,15 +7,18 @@ const baseUrl = "https://stormy-plateau-16452.herokuapp.com/posts";
 
 searchBtn.addEventListener("click", (e) => {
   selectDom.value = "desc";
+  console.log("btn :>> ", e);
   getData();
 });
 inputDom.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
     selectDom.value = "desc";
+    console.log("enter :>> ", e);
     getData();
   }
 });
 selectDom.addEventListener("change", (e) => {
+  console.log("select :>> ", e);
   getData();
 });
 
@@ -25,12 +28,15 @@ getData();
 
 async function getData() {
   const url = `${baseUrl}?timeSort=${selectDom.value}&q=${inputDom.value}`;
-
-  const res = await axios.get(url);
-  if (res.data.status) {
-    data = res.data.data;
-    console.log(data);
-    render();
+  try {
+    const res = await axios.get(url);
+    if (res.data.status) {
+      data = res.data.data;
+      console.log(data);
+      render();
+    }
+  } catch (error) {
+    console.dir(error);
   }
 }
 
