@@ -1,15 +1,37 @@
 const postsDom = document.querySelector("#posts");
+const selectDom = document.querySelector("#select");
+const inputDom = document.querySelector("#search-input");
+const searchBtn = document.querySelector("#search-btn");
 
-const url = "https://stormy-plateau-16452.herokuapp.com/posts";
+const baseUrl = "https://stormy-plateau-16452.herokuapp.com/posts";
+
+searchBtn.addEventListener("click", (e) => {
+  selectDom.value = "desc";
+  getData();
+});
+inputDom.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    selectDom.value = "desc";
+    getData();
+  }
+});
+selectDom.addEventListener("change", (e) => {
+  getData();
+});
 
 let data = [];
 
 getData();
 
 async function getData() {
+  const url = `${baseUrl}?timeSort=${selectDom.value}&q=${inputDom.value}`;
+
   const res = await axios.get(url);
-  data = res.data.data;
-  render();
+  if (res.data.status) {
+    data = res.data.data;
+    console.log(data);
+    render();
+  }
 }
 
 function render() {
